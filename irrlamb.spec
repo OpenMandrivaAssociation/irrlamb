@@ -7,7 +7,7 @@ Group:			Games
 URL:			http://code.google.com/p/irrlamb/
 Source:			%{name}-%{version}-src.tar.bz2
 Source1:		%{name}.png
-BuildRequires:		boost-devel
+BuildRequires:		libboost-devel
 BuildRequires:		libbullet-devel
 BuildRequires:		mesaglut-devel
 BuildRequires:		libaudiere-devel
@@ -45,7 +45,7 @@ install -m 755 %{name} %{buildroot}%{_gamesbindir}
 
 install -dm 755 %{buildroot}%{_gamesdatadir}/%{name}
 for i in art fonts levels meshes scenes scripts terrain textures; do
-	%__cp -R $i \
+	cp -R $i \
 		%{buildroot}%{_gamesdatadir}/%{name}
 done
 
@@ -55,7 +55,7 @@ cat > %{name}-wrapper.sh << EOF
 if [ ! -d ~/.%{name} ]; then
 	mkdir ~/.%{name}
 	cd ~/.%{name}
-	ln -s %{_gamedatasdir}/%{name}/* .
+	ln -s %{_gamesdatasdir}/%{name}/* .
 	cd ..
 fi
 
@@ -79,6 +79,7 @@ Name=irrlamb
 Path=
 Terminal=false
 Type=Application
+Categories=Game;ArcadeGame;
 EOF
 
 %clean
