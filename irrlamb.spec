@@ -29,13 +29,7 @@ sed -i -e 's|lua5.1/||g' src/engine/scripting.h
 sed -i -e 's|lua5.1|lua|g' SConstruct
 
 %build
-# Setup for parallel builds
-numprocs=`egrep -c ^cpu[0-9]+ /proc/stat || :`
-if [ "$numprocs" = "0" ]; then
-	numprocs=1
-fi
-
-scons -j$numprocs
+scons %_smp_mflags
 
 %install
 rm -rf %{buildroot}
