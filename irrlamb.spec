@@ -73,7 +73,7 @@ mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/%{name}.desktop << EOF
 [Desktop Entry]
 Comment=irrlamb is a 3D game
-Exec=%{name}-wrapper.sh
+Exec=%{name}
 Icon=%{name}.png
 Name=irrlamb
 Path=
