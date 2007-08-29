@@ -38,7 +38,7 @@ install -dm 755 %{buildroot}%{_gamesbindir}
 install -m 755 %{name} %{buildroot}%{_gamesbindir}/%{name}.real
 
 install -dm 755 %{buildroot}%{_gamesdatadir}/%{name}
-for i in art campaigns fonts levels meshes scenes scripts terrain textures; do
+for i in art campaigns fonts levels meshes scenes scripts sounds terrain textures; do
 	cp -R $i \
 		%{buildroot}%{_gamesdatadir}/%{name}
 done
