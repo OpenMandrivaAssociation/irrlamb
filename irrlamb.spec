@@ -74,7 +74,7 @@ cat > %{buildroot}%{_datadir}/applications/%{name}.desktop << EOF
 [Desktop Entry]
 Comment=irrlamb is a 3D game
 Exec=%{name}
-Icon=%{name}.png
+Icon=%{name}
 Name=irrlamb
 Path=
 Terminal=false
