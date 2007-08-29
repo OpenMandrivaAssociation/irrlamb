@@ -55,7 +55,7 @@ cat > %{name}-wrapper.sh << EOF
 if [ ! -d ~/.%{name} ]; then
 	mkdir ~/.%{name}
 	cd ~/.%{name}
-	ln -s %{_gamesdatasdir}/%{name}/* .
+	ln -s %{_gamesdatadir}/%{name}/* .
 	cd ..
 fi
 
