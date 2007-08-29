@@ -1,6 +1,6 @@
 Summary:		irrlamb is a 3D game
 Name:			irrlamb
-Version:		0.0.4
+Version:		0.0.5
 Release:		%mkrel 1
 License:		GPL
 Group:			Games
