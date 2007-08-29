@@ -60,7 +60,7 @@ if [ ! -d ~/.%{name} ]; then
 fi
 
 cd ~/.%{name}
-%{name}.real "$@"
+exec %{name}.real "$@"
 EOF
 
 install -m 755 %{name}-wrapper.sh %{buildroot}%{_gamesbindir}/%{name}
