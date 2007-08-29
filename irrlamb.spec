@@ -41,7 +41,7 @@ scons -j$numprocs
 rm -rf %{buildroot}
 
 install -dm 755 %{buildroot}%{_gamesbindir}
-install -m 755 %{name} %{buildroot}%{_gamesbindir}
+install -m 755 %{name} %{buildroot}%{_gamesbindir}/%{name}.real
 
 install -dm 755 %{buildroot}%{_gamesdatadir}/%{name}
 for i in art fonts levels meshes scenes scripts terrain textures; do
@@ -60,10 +60,10 @@ if [ ! -d ~/.%{name} ]; then
 fi
 
 cd ~/.%{name}
-%{name}
+%{name}.real
 EOF
 
-install -m 755 %{name}-wrapper.sh %{buildroot}%{_gamesbindir}
+install -m 755 %{name}-wrapper.sh %{buildroot}%{_gamesbindir}/%{name}
 
 # icon and menu-entry
 install -dm 755 %{buildroot}%{_datadir}/pixmaps
