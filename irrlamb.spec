@@ -7,6 +7,7 @@ Group:			Games
 URL:			http://code.google.com/p/irrlamb/
 Source:			%{name}-%{version}-src.tar.bz2
 Source1:		%{name}.png
+Patch0:			%{name}-0.0.5-system-libs.patch
 BuildRequires:		libboost-devel
 BuildRequires:		libbullet-devel
 BuildRequires:		mesaglut-devel
@@ -23,12 +24,20 @@ frustrating gameplay.
 
 %prep
 %setup -q -n %{name}
+%patch0 -p1
 
 # adjust lua5.1 paths
 sed -i -e 's|lua5.1/||g' src/engine/scripting.h
 sed -i -e 's|lua5.1|lua|g' SConstruct
 
+
+# use system libraries one
+rm -rf libraries
+sed -i -e 's|./libraries/lib|%{_libdir}|g' SConstruct
+
 %build
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
 scons %_smp_mflags
 
 %install
