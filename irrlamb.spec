@@ -16,7 +16,6 @@ BuildRequires:		irrlicht-devel
 BuildRequires:		lua-devel
 BuildRequires:		pkgconfig
 BuildRequires:		scons
-BuildRoot:		%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 irrlamb is a 3D game that probably involves a lot of physics and
