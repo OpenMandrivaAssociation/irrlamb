@@ -1,4 +1,4 @@
-Summary:		irrlamb is a 3D game
+Summary:		3D game
 Name:			irrlamb
 Version:		0.0.5
 Release:		%mkrel 1
