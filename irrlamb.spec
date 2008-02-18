@@ -1,7 +1,7 @@
 Summary:		3D game
 Name:			irrlamb
 Version:		0.0.5
-Release:		%mkrel 1
+Release:		%mkrel 2
 License:		GPL
 Group:			Games
 URL:			http://code.google.com/p/irrlamb/
