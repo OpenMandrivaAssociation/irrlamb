@@ -2,7 +2,7 @@ Summary:		3D game
 Name:			irrlamb
 Version:		0.0.5
 Release:		%mkrel 2
-License:		GPL
+License:		GPLv2+
 Group:			Games
 URL:			http://code.google.com/p/irrlamb/
 Source:			%{name}-%{version}-src.tar.bz2
@@ -38,7 +38,7 @@ sed -i -e 's|./libraries/lib|%{_libdir}|g' SConstruct
 %build
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
-scons %_smp_mflags
+scons %{_smp_mflags}
 
 %install
 rm -rf %{buildroot}
@@ -79,7 +79,6 @@ Comment=irrlamb is a 3D game
 Exec=%{name}
 Icon=%{name}
 Name=irrlamb
-Path=
 Terminal=false
 Type=Application
 Categories=Game;ArcadeGame;
