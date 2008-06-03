@@ -1,21 +1,21 @@
-Summary:		3D game
-Name:			irrlamb
-Version:		0.0.5
-Release:		%mkrel 2
-License:		GPLv2+
-Group:			Games
-URL:			http://code.google.com/p/irrlamb/
-Source:			%{name}-%{version}-src.tar.bz2
-Source1:		%{name}.png
-Patch0:			%{name}-0.0.5-system-libs.patch
-BuildRequires:		libboost-devel
-BuildRequires:		libbullet-devel
-BuildRequires:		mesaglut-devel
-BuildRequires:		libaudiere-devel
-BuildRequires:		irrlicht-devel
-BuildRequires:		lua-devel
-BuildRequires:		pkgconfig
-BuildRequires:		scons
+Summary:	3D game
+Name:		irrlamb
+Version:	0.0.5
+Release:	%mkrel 2
+License:	GPLv2+
+Group:		Games
+URL:		http://code.google.com/p/irrlamb/
+Source:		%{name}-%{version}-src.tar.bz2
+Source1:	%{name}.png
+Patch1:		%{name}-0.0.5-fix-irrlicht.patch
+BuildRequires:	libboost-devel
+BuildRequires:	libbullet-devel
+BuildRequires:	mesaglut-devel
+BuildRequires:	libaudiere-devel
+BuildRequires:	irrlicht-devel
+BuildRequires:	lua-devel
+BuildRequires:	pkgconfig
+BuildRequires:	scons
 BuildRoot:		%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -24,20 +24,23 @@ frustrating gameplay.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
+%patch1 -p1
 
 # adjust lua5.1 paths
 sed -i -e 's|lua5.1/||g' src/engine/scripting.h
 sed -i -e 's|lua5.1|lua|g' SConstruct
 
-
 # use system libraries one
 rm -rf libraries
+sed -i -e 's|./libraries/include|%{_includedir}|g' SConstruct 
+sed -i -e 's|./libraries/include/bullet|%{_includedir}/bullet|g' SConstruct
 sed -i -e 's|./libraries/lib|%{_libdir}|g' SConstruct
+sed -i -e 's|-O3 -DNDEBUG||g' SConstruct
 
 %build
 export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
+export CXXFLAGS=$CFLAGS
+
 scons %{_smp_mflags}
 
 %install
