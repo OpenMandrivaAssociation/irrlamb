@@ -8,6 +8,7 @@ URL:		http://code.google.com/p/irrlamb/
 Source:		%{name}-%{version}-src.tar.bz2
 Source1:	%{name}.png
 Patch1:		%{name}-0.0.5-fix-irrlicht.patch
+Patch2:		%{name}-0.0.5-various-fixes.patch
 BuildRequires:	libboost-devel
 BuildRequires:	libbullet-devel
 BuildRequires:	mesaglut-devel
@@ -25,6 +26,7 @@ frustrating gameplay.
 %prep
 %setup -q -n %{name}
 %patch1 -p1
+%patch2 -p1
 
 # adjust lua5.1 paths
 sed -i -e 's|lua5.1/||g' src/engine/scripting.h
