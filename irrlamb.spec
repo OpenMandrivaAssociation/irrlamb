@@ -12,12 +12,12 @@ Patch2:		%{name}-0.0.5-various-fixes.patch
 BuildRequires:	libboost-devel
 BuildRequires:	libbullet-devel
 BuildRequires:	mesaglut-devel
-BuildRequires:	libaudiere-devel
+BuildRequires:	libaudiere-devel >= 1.9.4-6
 BuildRequires:	irrlicht-devel
-BuildRequires:	lua-devel
+BuildRequires:	lua-devel >= 5.1
 BuildRequires:	pkgconfig
 BuildRequires:	scons
-BuildRoot:		%{_tmppath}/%{name}-%{version}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 irrlamb is a 3D game that probably involves a lot of physics and
