@@ -3,7 +3,7 @@ Name:		irrlamb
 Version:	0.0.5
 Release:	%mkrel 2
 License:	GPLv2+
-Group:		Games
+Group:		Games/Arcade
 URL:		http://code.google.com/p/irrlamb/
 Source:		%{name}-%{version}-src.tar.bz2
 Source1:	%{name}.png
