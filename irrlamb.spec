@@ -1,7 +1,7 @@
 Summary:	3D game
 Name:		irrlamb
 Version:	0.0.5
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://code.google.com/p/irrlamb/
@@ -37,7 +37,7 @@ rm -rf libraries
 sed -i -e 's|./libraries/include|%{_includedir}|g' SConstruct 
 sed -i -e 's|./libraries/include/bullet|%{_includedir}/bullet|g' SConstruct
 sed -i -e 's|./libraries/lib|%{_libdir}|g' SConstruct
-sed -i -e 's|-O3 -DNDEBUG||g' SConstruct
+#sed -i -e 's|-O3 -DNDEBUG||g' SConstruct
 
 %build
 export CFLAGS="%{optflags}"
