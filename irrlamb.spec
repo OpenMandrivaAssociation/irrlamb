@@ -9,6 +9,8 @@ Source:		%{name}-%{version}-src.tar.bz2
 Source1:	%{name}.png
 Patch1:		%{name}-0.0.5-fix-irrlicht.patch
 Patch2:		%{name}-0.0.5-various-fixes.patch
+# (misc) fix needed to compile with version of the stack in 2009.1
+Patch3:     irrlamb-0.0.5-fix-irrlicht-again.patch
 BuildRequires:	libboost-devel
 BuildRequires:	libbullet-devel
 BuildRequires:	mesaglut-devel
@@ -27,6 +29,7 @@ frustrating gameplay.
 %setup -q -n %{name}
 %patch1 -p1
 %patch2 -p1
+%patch3 -p0
 
 # adjust lua5.1 paths
 sed -i -e 's|lua5.1/||g' src/engine/scripting.h
