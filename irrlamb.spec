@@ -17,6 +17,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	scons
 BuildRequires:	dos2unix
 #BuildRequires:	tinyxml-devel
+BuildRequires:	sqlite3-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
