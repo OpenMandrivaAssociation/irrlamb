@@ -1,7 +1,7 @@
 Summary:	3D physics game
 Name:		irrlamb
 Version:	0.1.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv3
 Group:		Games/Arcade
 URL:		http://code.google.com/p/irrlamb/
