@@ -1,11 +1,11 @@
 Summary:	3D physics game
 Name:		irrlamb
-Version:	0.1.0
-Release:	%mkrel 3
+Version:	0.1.1
+Release:	1
 License:	GPLv3
 Group:		Games/Arcade
 URL:		http://code.google.com/p/irrlamb/
-Source:		http://irrlamb.googlecode.com/files/%{name}-%{version}-src.tar.bz2
+Source0:	http://irrlamb.googlecode.com/files/%{name}-%{version}-src.tar.bz2
 Source1:	%{name}.png
 BuildRequires:	libboost-devel
 BuildRequires:	libbullet-devel
@@ -13,12 +13,10 @@ BuildRequires:	mesaglut-devel
 BuildRequires:	libaudiere-devel >= 1.9.4-6
 BuildRequires:	irrlicht-devel
 BuildRequires:	lua-devel >= 5.1
-BuildRequires:	pkgconfig
-BuildRequires:	scons
+BuildRequires:	cmake
 BuildRequires:	dos2unix
 #BuildRequires:	tinyxml-devel
-BuildRequires:	sqlite3-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRequires:	pkgconfig(sqlite3)
 
 %description
 irrlamb is a 3D game that probably involves a lot of physics and
@@ -55,10 +53,10 @@ sed -i -e 's|Irrlicht sqlite3|Irrlicht sqlite3 GL bulletdynamics bulletcollision
 export CFLAGS="%{optflags} -fno-strict-aliasing"
 export CXXFLAGS=$CFLAGS
 
-%scons %{_smp_mflags}
+%cmake
+%make
 
 %install
-rm -rf %{buildroot}
 
 install -dm 755 %{buildroot}%{_gamesbindir}
 install -m 755 %{name} %{buildroot}%{_gamesbindir}/%{name}.real
@@ -104,7 +102,6 @@ EOF
 rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc changelog.txt readme.txt license.txt
 %{_gamesbindir}/%{name}*
 %dir %{_gamesdatadir}/%{name}
