@@ -5,65 +5,47 @@ Release:	1
 License:	GPLv3
 Group:		Games/Arcade
 URL:		http://code.google.com/p/irrlamb/
-Source0:	http://irrlamb.googlecode.com/files/%{name}-%{version}-src.tar.bz2
+Source0:	http://irrlamb.googlecode.com/files/%{name}-%{version}-src.tar.gz
 Source1:	%{name}.png
-BuildRequires:	libboost-devel
-BuildRequires:	libbullet-devel
-BuildRequires:	mesaglut-devel
-BuildRequires:	libaudiere-devel >= 1.9.4-6
+BuildRequires:	pkgconfig(bullet)
+BuildRequires:	pkgconfig(openal)
+BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	boost-devel
+BuildRequires:	freeglut-devel
+BuildRequires:	audiere-devel >= 1.9.4-6
 BuildRequires:	irrlicht-devel
 BuildRequires:	lua-devel >= 5.1
 BuildRequires:	cmake
 BuildRequires:	dos2unix
-#BuildRequires:	tinyxml-devel
-BuildRequires:	pkgconfig(sqlite3)
 
 %description
 irrlamb is a 3D game that probably involves a lot of physics and
 frustrating gameplay.
 
 %prep
-%setup -q -n %{name}
-
-dos2unix *.txt
-chmod 644 *.txt
-
-# use system-installed tinyxml
-#rm -r src/tinyxml
-#find src -name '*.cpp' | xargs sed -i -e 's|../tinyxml/tinyxml.h|tinyxml.h|g'
-#sed -i -e 's|glob.glob("src/tinyxml/*.cpp")||g' SConstruct
+%setup -q -n %{name}-%{version}-src
 
 # use system-wide bullet library
-rm -r src/bullet
-sed -i -e 's|glob.glob("src/bullet/*.cpp")|"%{_includedir}/bullet/*.h"|g' SConstruct
 find src -name '*.h' | xargs sed -i -e 's|btBulletCollisionCommon.h|bullet/btBulletCollisionCommon.h|g'
 find src -name '*.h' | xargs sed -i -e 's|btBulletDynamicsCommon.h|bullet/btBulletDynamicsCommon.h|g'
-
-# adjust lua5.1 paths
-sed -i -e 's|lua5.1/||g' src/engine/scripting.h
-sed -i -e 's|lua5.1|lua|g' SConstruct
-
-# use system libraries one
-rm -rf libraries
-sed -i -e 's|./src/bullet|%{_includedir}/bullet|g' SConstruct
-sed -i -e 's|/usr/local/lib|%{_libdir}|g' SConstruct
-sed -i -e 's|Irrlicht sqlite3|Irrlicht sqlite3 GL bulletdynamics bulletcollision bulletmath|g' SConstruct
 
 %build
 export CFLAGS="%{optflags} -fno-strict-aliasing"
 export CXXFLAGS=$CFLAGS
+export LDFLAGS="-ldl"
 
 %cmake
 %make
 
 %install
-
+pwd
 install -dm 755 %{buildroot}%{_gamesbindir}
-install -m 755 %{name} %{buildroot}%{_gamesbindir}/%{name}.real
+install -m 755 bin/Release/%{name} %{buildroot}%{_gamesbindir}/%{name}.real
 
 install -dm 755 %{buildroot}%{_gamesdatadir}/%{name}
-for i in art campaigns collision fonts levels meshes scenes scripts textures; do
-	cp -R $i %{buildroot}%{_gamesdatadir}/%{name}
+
+for i in art fonts levels meshes scenes scripts shaders sounds textures; do
+	cp -R working/$i %{buildroot}%{_gamesdatadir}/%{name}
 done
 
 # startscript
@@ -98,11 +80,8 @@ Type=Application
 Categories=Game;ArcadeGame;
 EOF
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%doc changelog.txt readme.txt license.txt
+%doc deployment/*txt
 %{_gamesbindir}/%{name}*
 %dir %{_gamesdatadir}/%{name}
 %{_gamesdatadir}/%{name}/*
