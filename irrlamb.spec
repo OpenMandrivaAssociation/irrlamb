@@ -32,7 +32,7 @@ find src -name '*.h' | xargs sed -i -e 's|btBulletDynamicsCommon.h|bullet/btBull
 %build
 export CFLAGS="%{optflags} -fno-strict-aliasing"
 export CXXFLAGS=$CFLAGS
-export LDFLAGS="-ldl"
+export LDFLAGS="-ldl -lpthread"
 
 %cmake
 %make
