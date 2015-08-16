@@ -20,7 +20,7 @@ BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xrandr)
-BuildRequires:	pkgconfig(freetype)
+BuildRequires:	pkgconfig(freetype2)
 
 %description
 irrlamb is a 3D game that probably involves a lot of physics and
