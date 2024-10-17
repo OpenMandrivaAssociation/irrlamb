@@ -4,7 +4,7 @@ Version:	0.2.0
 Release:	1
 License:	GPLv3+
 Group:		Games/Arcade
-Url:		http://code.google.com/p/irrlamb/
+Url:		https://code.google.com/p/irrlamb/
 # obtaining the source :git clone https://github.com/jazztickets/irrlamb.git
 Source0:	%{name}-%{version}.tar.gz
 
